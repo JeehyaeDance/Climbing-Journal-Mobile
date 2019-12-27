@@ -16,14 +16,13 @@ export default class LogIn extends Component {
 
   logIn(e) {
     e.preventDefault();
-    console.log(this.state.userName);
     axios
       .get(`${urlResolver()}/login/${this.state.userName}`)
       .then(response => {
         let loginInfo = response.data;
         if (loginInfo.email === this.state.email) {
-          // this.props.toggleLoginPage();
-          // this.props.setUserId(loginInfo.userid);
+          this.props.toggleLoginPage();
+          this.props.setUserId(loginInfo.userid);
         } else {
           alert("your Log In information is not correct");
         }
@@ -52,7 +51,7 @@ export default class LogIn extends Component {
         </View>
         <View style={styles.needAcc}>
           <Text>Need an account?</Text>
-          <Button title="Create Account" />
+          <Button title="Create Account" onPress={this.props.toggleLoginPage} />
         </View>
       </View>
     );
