@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import axios from "axios";
+import { urlResolver } from "./utills.js";
 
 export default class LogIn extends Component {
   constructor(props) {
@@ -8,6 +10,25 @@ export default class LogIn extends Component {
       userName: "",
       email: ""
     };
+
+    this.logIn = this.logIn.bind(this);
+  }
+
+  logIn(e) {
+    e.preventDefault();
+    console.log(this.state.userName);
+    axios
+      .get(`${urlResolver()}/login/${this.state.userName}`)
+      .then(response => {
+        let loginInfo = response.data;
+        if (loginInfo.email === this.state.email) {
+          // this.props.toggleLoginPage();
+          // this.props.setUserId(loginInfo.userid);
+        } else {
+          alert("your Log In information is not correct");
+        }
+      })
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -19,15 +40,15 @@ export default class LogIn extends Component {
             style={styles.input}
             value={this.state.userName}
             placeholder="User Name"
-            onChangeText={userName => this.setState({ userName })}
+            onChangeText={userName => this.setState({ userName: userName.toLowerCase() })}
           />
           <TextInput
             style={styles.input}
             value={this.state.email}
             placeholder="Email"
-            onChangeText={email => this.setState({ email })}
+            onChangeText={email => this.setState({ email: email.toLowerCase() })}
           />
-          <Button title="Login" />
+          <Button title="Login" onPress={this.logIn} />
         </View>
         <View style={styles.needAcc}>
           <Text>Need an account?</Text>
