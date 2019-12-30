@@ -35,6 +35,7 @@ export default class LogIn extends Component {
       <View>
         <Text style={styles.title}>Climbing Day</Text>
         <View style={styles.container}>
+          <Text style={styles.pageName}>Log In</Text>
           <TextInput
             style={styles.input}
             value={this.state.userName}
@@ -47,7 +48,7 @@ export default class LogIn extends Component {
             placeholder="Email"
             onChangeText={email => this.setState({ email: email.toLowerCase() })}
           />
-          <Button title="Login" onPress={this.logIn} />
+          <Button title="Log In" onPress={this.logIn} />
         </View>
         <View style={styles.needAcc}>
           <Text>Need an account?</Text>
@@ -81,6 +82,11 @@ const styles = StyleSheet.create({
   },
   needAcc: {
     fontSize: 20,
+    paddingBottom: 50
+  },
+  pageName: {
+    fontSize: 30,
+    fontWeight: "bold",
     paddingBottom: 50
   }
 });

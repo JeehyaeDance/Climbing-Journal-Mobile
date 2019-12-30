@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import LogIn from "./client/LogIn.js";
 import CreateAcc from "./client/CreateAcc.js";
+import LogPage from "./client/LogPage.js";
 
 export default class App extends Component {
   constructor() {
@@ -32,7 +33,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         {userId ? (
-          <Text>This is Log Page</Text>
+          <LogPage userId={userId} />
         ) : showLoginPage ? (
           <LogIn toggleLoginPage={this.toggleLoginPage} setUserId={this.setUserId} />
         ) : (
