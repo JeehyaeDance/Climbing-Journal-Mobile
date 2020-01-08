@@ -51,7 +51,7 @@ export default class LogPage extends Component {
           <Button title="STATS" onPress={this.toggleStats} />
         </View>
         {toggleStat ? (
-          <Stat />
+          <Stat userId={userId} />
         ) : (
           <View style={styles.form}>
             <View style={styles.note}>
