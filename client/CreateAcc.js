@@ -32,21 +32,26 @@ export default class CreateAcc extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.pageName}>Create an Account</Text>
-        <TextInput
-          style={styles.input}
-          value={this.state.accUserName}
-          placeholder="User Name"
-          onChangeText={accUserName => this.setState({ accUserName: accUserName.toLowerCase() })}
-        />
-        <TextInput
-          style={styles.input}
-          value={this.state.accEmail}
-          placeholder="Email"
-          onChangeText={accEmail => this.setState({ accEmail: accEmail.toLowerCase() })}
-        />
-        <Button title="Create Account" onPress={this.clickHandler} />
+      <View>
+        <View style={styles.container}>
+          <Text style={styles.pageName}>Create an Account</Text>
+          <TextInput
+            style={styles.input}
+            value={this.state.accUserName}
+            placeholder="User Name"
+            onChangeText={accUserName => this.setState({ accUserName: accUserName.toLowerCase() })}
+          />
+          <TextInput
+            style={styles.input}
+            value={this.state.accEmail}
+            placeholder="Email"
+            onChangeText={accEmail => this.setState({ accEmail: accEmail.toLowerCase() })}
+          />
+          <Button title="Create Account" onPress={this.clickHandler} />
+        </View>
+        <View style={styles.backButton}>
+          <Button title="Back to LogIn Page" onPress={this.props.toggleLoginPage} />
+        </View>
       </View>
     );
   }
@@ -72,5 +77,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     paddingBottom: 50
+  },
+  backButton: {
+    marginBottom: 30
   }
 });
