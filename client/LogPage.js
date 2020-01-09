@@ -46,14 +46,20 @@ export default class LogPage extends Component {
     const { toggleStat, level, userId, isLogged, note } = this.state;
     return (
       <View>
-        <View style={styles.navBar}>
-          <Button title="LOG" />
-          <Button title="STATS" onPress={this.toggleStats} />
-        </View>
         {toggleStat ? (
-          <Stat userId={userId} />
+          <View>
+            <View style={styles.navBar}>
+              <Button title="LOG" onPress={this.toggleStats} />
+              <Button title="STATS" disabled="true" />
+            </View>
+            <Stat userId={userId} />
+          </View>
         ) : (
           <View style={styles.form}>
+            <View style={styles.navBar}>
+              <Button title="LOG" disabled="true" />
+              <Button title="STATS" onPress={this.toggleStats} />
+            </View>
             <View style={styles.note}>
               <Text style={styles.log}>Note:</Text>
               <TextInput style={styles.noteBox} onChangeText={noteVal => this.setState({ note: noteVal })} />
