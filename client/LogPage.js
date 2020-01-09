@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Picker, TouchableOpacity } f
 import axios from "axios";
 import { urlResolver } from "./utills.js";
 import Stat from "./Stat.js";
+import StatsTabs from "./StatsTabs";
 
 export default class LogPage extends Component {
   constructor(props) {
@@ -48,18 +49,11 @@ export default class LogPage extends Component {
       <View>
         {toggleStat ? (
           <View>
-            <View style={styles.navBar}>
-              <TouchableOpacity style={styles.navButton} onPress={this.toggleStats}>
-                <Text style={styles.buttonText}>LOG</Text>
-              </TouchableOpacity>
-              <View style={styles.clickedButton}>
-                <Text style={styles.clickedText}>STATS</Text>
-              </View>
-            </View>
+            <StatsTabs onClickLog={this.toggleStats} />
             <Stat userId={userId} />
           </View>
         ) : (
-          <View style={styles.form}>
+          <View>
             <View style={styles.navBar}>
               <View style={styles.clickedButton}>
                 <Text style={styles.clickedText}>LOG</Text>
@@ -68,27 +62,33 @@ export default class LogPage extends Component {
                 <Text style={styles.buttonText}>STATS</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.note}>
-              <Text style={styles.log}>Note:</Text>
-              <TextInput style={styles.noteBox} onChangeText={noteVal => this.setState({ note: noteVal })} />
+            <View style={styles.form}>
+              <View style={styles.note}>
+                <Text style={styles.log}>Note:</Text>
+                <TextInput style={styles.noteBox} onChangeText={noteVal => this.setState({ note: noteVal })} />
+              </View>
+              <View style={styles.level}>
+                <Text style={styles.log}>Level: {level}</Text>
+              </View>
+              <Picker selectedValue={level} onValueChange={itemValue => this.setState({ level: itemValue })}>
+                <Picker.Item label="V0" value="0" />
+                <Picker.Item label="V1" value="1" />
+                <Picker.Item label="V2" value="2" />
+                <Picker.Item label="V3" value="3" />
+                <Picker.Item label="V4" value="4" />
+                <Picker.Item label="V5" value="5" />
+                <Picker.Item label="V6" value="6" />
+                <Picker.Item label="V7" value="7" />
+                <Picker.Item label="V8" value="8" />
+                <Picker.Item label="V9" value="9" />
+              </Picker>
             </View>
-            <View style={styles.level}>
-              <Text style={styles.log}>Level: {level}</Text>
+            <View>
+              <TouchableOpacity onPress={this.saveLog} style={styles.saveBtn}>
+                <Text style={styles.buttonText}>SAVE</Text>
+              </TouchableOpacity>
+              {isLogged ? <Text>Your log is saved</Text> : null}
             </View>
-            <Picker selectedValue={level} onValueChange={itemValue => this.setState({ level: itemValue })}>
-              <Picker.Item label="V0" value="0" />
-              <Picker.Item label="V1" value="1" />
-              <Picker.Item label="V2" value="2" />
-              <Picker.Item label="V3" value="3" />
-              <Picker.Item label="V4" value="4" />
-              <Picker.Item label="V5" value="5" />
-              <Picker.Item label="V6" value="6" />
-              <Picker.Item label="V7" value="7" />
-              <Picker.Item label="V8" value="8" />
-              <Picker.Item label="V9" value="9" />
-            </Picker>
-            <Button title="SAVE" onPress={this.saveLog} />
-            {isLogged ? <Text>Your log is saved</Text> : null}
           </View>
         )}
       </View>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start"
   },
   log: {
-    fontSize: 30
+    fontSize: 25
   },
   noteBox: {
     borderWidth: 1,
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   navButton: {
     height: 40,
-    width: 80,
+    width: 100,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderBottomWidth: 0,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   },
   clickedButton: {
     height: 40,
-    width: 80,
+    width: 100,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderBottomWidth: 0,
@@ -163,5 +163,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#708090",
     fontWeight: "bold"
+  },
+  saveBtn: {
+    height: 40,
+    width: 160,
+    borderRadius: 10,
+    borderColor: "#90EE90",
+    borderWidth: 3,
+    marginTop: 20,
+    padding: 5
   }
 });
