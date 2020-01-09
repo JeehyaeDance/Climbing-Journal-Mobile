@@ -50,14 +50,14 @@ export default class LogPage extends Component {
           <View>
             <View style={styles.navBar}>
               <Button title="LOG" onPress={this.toggleStats} />
-              <Button title="STATS" disabled="true" />
+              <Button title="STATS" disabled />
             </View>
             <Stat userId={userId} />
           </View>
         ) : (
           <View style={styles.form}>
             <View style={styles.navBar}>
-              <Button title="LOG" disabled="true" />
+              <Button title="LOG" disabled />
               <Button title="STATS" onPress={this.toggleStats} />
             </View>
             <View style={styles.note}>
