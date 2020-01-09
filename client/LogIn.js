@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight } from "react-native";
 import axios from "axios";
 import { urlResolver } from "./utills.js";
 
@@ -48,7 +48,9 @@ export default class LogIn extends Component {
             placeholder="Email"
             onChangeText={email => this.setState({ email: email.toLowerCase() })}
           />
-          <Button title="Log In" onPress={this.logIn} />
+          <TouchableHighlight onPress={this.logIn} style={styles.logInButton}>
+            <Text style={styles.buttonText}>Log In</Text>
+          </TouchableHighlight>
         </View>
         <View style={styles.needAcc}>
           <Text>Need an account?</Text>
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderRadius: 7,
-    borderColor: "black",
+    borderColor: "#90EE90",
     fontSize: 20,
     margin: 10,
     padding: 10,
@@ -77,6 +79,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 45,
+    color: "#90EE90",
     fontWeight: "bold",
     paddingTop: 50
   },
@@ -88,5 +91,18 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     paddingBottom: 50
+  },
+  logInButton: {
+    height: 40,
+    width: 160,
+    borderRadius: 10,
+    borderColor: "#90EE90",
+    borderWidth: 3,
+    marginTop: 20,
+    padding: 5
+  },
+  buttonText: {
+    fontSize: 20,
+    textAlign: "center"
   }
 });
