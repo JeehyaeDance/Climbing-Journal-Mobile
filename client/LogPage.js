@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput, Button, Picker } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Picker, TouchableOpacity } from "react-native";
 import axios from "axios";
 import { urlResolver } from "./utills.js";
 import Stat from "./Stat.js";
@@ -49,16 +49,24 @@ export default class LogPage extends Component {
         {toggleStat ? (
           <View>
             <View style={styles.navBar}>
-              <Button title="LOG" onPress={this.toggleStats} />
-              <Button title="STATS" disabled />
+              <TouchableOpacity style={styles.navButton} onPress={this.toggleStats}>
+                <Text style={styles.buttonText}>LOG</Text>
+              </TouchableOpacity>
+              <View style={styles.clickedButton}>
+                <Text style={styles.clickedText}>STATS</Text>
+              </View>
             </View>
             <Stat userId={userId} />
           </View>
         ) : (
           <View style={styles.form}>
             <View style={styles.navBar}>
-              <Button title="LOG" disabled />
-              <Button title="STATS" onPress={this.toggleStats} />
+              <View style={styles.clickedButton}>
+                <Text style={styles.clickedText}>LOG</Text>
+              </View>
+              <TouchableOpacity style={styles.navButton} onPress={this.toggleStats}>
+                <Text style={styles.buttonText}>STATS</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.note}>
               <Text style={styles.log}>Note:</Text>
@@ -90,10 +98,12 @@ export default class LogPage extends Component {
 
 const styles = StyleSheet.create({
   navBar: {
-    flex: 0.5,
     flexDirection: "row",
     justifyContent: "space-around",
-    paddingTop: 100
+    paddingTop: 60,
+    borderBottomColor: "#90EE90",
+    borderBottomWidth: 3,
+    marginBottom: 50
   },
   form: {
     display: "flex",
@@ -119,5 +129,39 @@ const styles = StyleSheet.create({
   note: {
     display: "flex",
     flexDirection: "row"
+  },
+  navButton: {
+    height: 40,
+    width: 80,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomWidth: 0,
+    borderColor: "#90EE90",
+    borderWidth: 3,
+    marginTop: 20,
+    padding: 5
+  },
+  buttonText: {
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold"
+  },
+  clickedButton: {
+    height: 40,
+    width: 80,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomWidth: 0,
+    borderColor: "#90EE90",
+    backgroundColor: "#E0FFFF",
+    borderWidth: 3,
+    marginTop: 20,
+    padding: 5
+  },
+  clickedText: {
+    fontSize: 20,
+    textAlign: "center",
+    color: "#708090",
+    fontWeight: "bold"
   }
 });
