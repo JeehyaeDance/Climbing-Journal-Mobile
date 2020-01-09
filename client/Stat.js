@@ -31,7 +31,8 @@ export default class Stat extends Component {
       backgroundGradientTo: "#08130D",
       backgroundGradientToOpacity: 0.5,
       color: (opacity = 1) => `rgba(73, 61, 31, ${opacity})`,
-      barPercentage: 0.5
+      barPercentage: 0.5,
+      decimalPlaces: 0
     };
     const screenWidth = Dimensions.get("window").width;
     let label, avg;
@@ -50,7 +51,9 @@ export default class Stat extends Component {
     return (
       <View>
         <Text>Weekly Progress</Text>
-        {this.state.logs ? <LineChart data={data} width={screenWidth} height={220} chartConfig={chartConfig} /> : null}
+        {this.state.logs ? (
+          <LineChart data={data} width={screenWidth} yAxisLabel={"V"} height={220} chartConfig={chartConfig} />
+        ) : null}
       </View>
     );
   }
